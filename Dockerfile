@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM node:16.13 as compiler
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install && npm install -g typescript
+RUN npm install
 RUN npm install mongodb
 RUN npm install express
 RUN npm install cors
