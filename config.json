@@ -1,0 +1,4 @@
+{    
+    "connectionString": "mongodb://admin:admin@mongo:27017/harpoondemo",
+    "PORT":5000
+}
