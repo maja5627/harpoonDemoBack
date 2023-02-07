@@ -1,7 +1,6 @@
 
 const mongoose = require('mongoose');
 const config = require('../config.json')
-const connectionString = config.connectionString;
 
 const options = {
   autoIndex: false, // Don't build indexes
@@ -13,6 +12,7 @@ const options = {
 };
 
 const connectWithRetry = () => {
+  const connectionString = config.connectionString;
   console.log('MongoDB connection with retry',connectionString)
 
   mongoose.connect(connectionString, options).then(()=>{
