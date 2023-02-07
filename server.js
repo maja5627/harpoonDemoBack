@@ -13,7 +13,7 @@ app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
-if(proccess.env.MONGOCONNECTION) {
+if(process.env.MONGOCONNECTION) {
   console.log('got override for monogo connection sring');
   config.connectionString = proccess.env.MONGOCONNECTION;
 }
