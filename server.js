@@ -15,5 +15,5 @@ app.listen(port, () => {
 
 if(process.env.MONGOCONNECTION) {
   console.log('got override for monogo connection sring');
-  config.connectionString = proccess.env.MONGOCONNECTION;
+  config.connectionString = process.env.MONGOCONNECTION;
 }
