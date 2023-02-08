@@ -7,14 +7,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
-const http = require('http');
 
 app.use(require("./services/records.controller"));
 const config = require ('./config.json');
 
-const server = http.createServer(app);
-
-server.listen(port);
+ 
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});
 
 if(process.env.MONGOCONNECTION) {
   console.log('got override for monogo connection sring', process.env.MONGOCONNECTION);
