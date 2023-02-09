@@ -1,6 +1,12 @@
 
 const mongoose = require('mongoose');
-const config = require('../config.json')
+const config = require('../config.json');
+const { MongoClient } = require("mongodb");
+var _db;
+const client = new MongoClient(config.connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const options = {
   autoIndex: false, // Don't build indexes
@@ -10,21 +16,23 @@ const options = {
   // If not connected, return errors immediately rather than waiting for reconnect
   bufferMaxEntries: 0
 };
+module.exports = {
 
-const connectWithRetry = () => {
+  connectWithRetry: function (callback) {
   const connectionString = config.connectionString;
   console.log('MongoDB connection with retry',connectionString)
 
-  mongoose.connect(connectionString, options).then(()=>{
-      console.log('MongoDB is connected');
-  }).catch(err=>{
-      console.log('MongoDB connection unsuccessful, retry after 4 seconds.');
-      setTimeout(connectWithRetry, 4000)
-  })
-};
-
-connectWithRetry();
-
-module.exports = {
-  Records: require('../services/records.model'),
+  client.connect(function (err,db) {
+    if (db)
+    {
+      _db = db.db("harpoondemo");
+      console.log("Successfully connected to MongoDB."); 
+    }
+    return callback(err);
+  });
+  },
+ 
+  getDb: function () {
+    return _db;
+  },
 };
