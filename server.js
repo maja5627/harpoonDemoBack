@@ -7,16 +7,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
-app.use(require("./routes/record"));
-const dbo = require("./db/conn");
+
+app.use(require("./services/records.controller"));
 const config = require ('./config.json');
 
  
 app.listen(port, () => {
-  dbo.connectWithRetry(function (err) {
-    if (err) console.error(err);
- 
-  });
   console.log(`Server is running on port: ${port}`);
 });
 
