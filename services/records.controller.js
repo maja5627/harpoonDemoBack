@@ -4,8 +4,8 @@ const recordService = require('./records.service');
 
 // routes
 router.post('/record/add', create);
-router.post('/update/:id', edit);
-router.delete('/:id', deleteOne);
+router.post('/record/update/:id', edit);
+router.delete('/record/:id', deleteOne);
 router.get('/record', getAll);
 router.get('/record/:id', getOne);
 
